@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PptxGenJS from 'pptxgenjs';
 import logo from "./logo.svg";
-import coverImg from '../public/cover.png';
+import coverImg from "./cover.png";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -25,7 +25,7 @@ export default function App(){
 
   function generatePPTX(){
     const pptx = new PptxGenJS(); pptx.layout = 'LAYOUT_WIDE';
-    const cover = pptx.addSlide(); cover.addImage({ data: coverImg, x:0, y:0, w:10, h:5.63 }); cover.addText('Ronda Operacional - Mercado Livre', { x:0.5, y:0.8, fontSize:28, color:'000000', bold:true }); cover.addText(dateStr, { x:0.5, y:1.3, fontSize:12, color:'666666' }); cover.addImage({ data: logo, x:8.0, y:0.15, w:1.8, h:0.5 });
+    const cover = pptx.addSlide(); cover.addImage({ data: cover, x:0, y:0, w:10, h:5.63 }); cover.addText('Ronda Operacional - Mercado Livre', { x:0.5, y:0.8, fontSize:28, color:'000000', bold:true }); cover.addText(dateStr, { x:0.5, y:1.3, fontSize:12, color:'666666' }); cover.addImage({ data: logo, x:8.0, y:0.15, w:1.8, h:0.5 });
     const slide = pptx.addSlide(); slide.addText('Ronda Operacional - Resumo', { x:0.3, y:0.2, fontSize:18, bold:true, color:'000000' }); slide.addText(dateStr, { x:8.0, y:0.2, fontSize:10, color:'666666' }); slide.addImage({ data: logo, x:8.0, y:0.1, w:1.2, h:0.35 });
     const colWidth = 4.6; let x = 0.3, y = 0.6;
     benches.forEach((b, idx)=>{ const col = idx % 2; x = 0.3 + col * colWidth; if(col === 0 && idx !== 0 && idx % 2 === 0){ y += 1.1; } const boxY = y; slide.addText(`${b.name}`, { x:x, y:boxY, fontSize:10, bold:true, color:'000000' }); const lines = ITEMS.map(it=>{ const st = b.items[it].status; const note = b.items[it].note ? ` - ${b.items[it].note}` : ''; return `${it}: ${st}${note}`; }); slide.addText(lines.join('\n'), { x:x, y:boxY+0.18, fontSize:8, color:'000000', lineSpacing:10, w:4.2 }); if(b.photo){ slide.addImage({ data: b.photo, x:x+3.2, y:boxY+0.0, w:0.9, h:0.6 }); } });
