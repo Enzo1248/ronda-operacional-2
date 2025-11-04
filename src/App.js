@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PptxGenJS from 'pptxgenjs';
-import logo from '../public/logo.svg';
+import logo from "./logo.svg";
 import coverImg from '../public/cover.png';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
